@@ -12,9 +12,35 @@ namespace ListBox
 {
     public partial class Form1 : Form
     {
+        private String resultStr = "";//결과
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.resultStr = this.lblResult.Text;
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            if (this.txtList.Text != "")
+            {
+                this.lbView.Items.Add(this.txtList.Text);
+                this.txtList.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("아이템을 입력하세요", "알림", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtList.Focus();
+            }
+        }
+
+        private void LbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.lblResult.Text = this.resultStr + this.lbView.SelectedItem.ToString();
         }
     }
 }
